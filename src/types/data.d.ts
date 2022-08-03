@@ -1,5 +1,8 @@
 // 类型声明文件  .d.ts只提供类型信息  为js文件提供类型信息
 // .d.ts 是implementation (代码实现文件) .d.ts 是declaration (类型声明文件)
+
+import { type } from "os"
+
 // 接口
 export interface ApiRes<T>{
     code:string
@@ -33,3 +36,15 @@ type Type1={[key in PropKeys]:number}
 // key in 表示key可以是props中所有键名称中的一个
 type Props={a:number;b:string;c:boolean}
 type Type3={[key in keyof Props]:number}
+
+// 索引查询类型
+type Propsarr={a:number;b:string,c:boolean}
+type typeA=Props['a']
+// 模拟partial类型   利用查询 T[p]
+type MyPartial<T>={[p in keyof T]?:T[p]}
+
+//索引查询同时查询多个
+type TypeA=Propsarr['a'|'b']
+type TypeB=Propsarr[keyof Propsarr]
+
+
